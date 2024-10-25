@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-body">
         <div class="title-header">
-            <h5>Add New Category</h5>
+            <h5>Chỉnh Sửa Danh Mục</h5>
         </div>
         <!-- New User start -->
         <div class="container-fluid">
@@ -16,7 +16,7 @@
                                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-home" type="button">Account</button>
+                                                data-bs-target="#pills-home" type="button">Quản Trị Viên</button>
                                         </li>
 
                                     </ul>
@@ -26,20 +26,20 @@
                                             <form class="theme-form theme-form-2 mega-form"
                                                 action={{ route('admin.categories.update', $category->id) }}>
                                                 <div class="card-header-1">
-                                                    <h5>Category Information</h5>
+                                                    <h5>Thông tin danh mục</h5>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="mb-4 row align-items-center">
                                                         <label class="form-label-title col-lg-2 col-md-3 mb-0">
-                                                            Name</label>
+                                                            Tên</label>
                                                         <div class="col-md-9 col-lg-10">
                                                             <input class="form-control" type="text" name="name"
                                                                 value={{ $category->name }}>
                                                         </div>
                                                     </div>
 
-                                                    <input type="submit" value="cap nhat">
+                                                    <input type="submit" value="Cập Nhật">
                                                 </div>
                                             </form>
                                         </div>

@@ -1,4 +1,4 @@
-<aside class="nav-sidebar">
+{{-- <aside class="nav-sidebar">
     <div class="nav-header"><a href="#"><img src="images/logo.png" alt="logo"></a><button class="nav-close"><i
                 class="icofont-close"></i></button></div>
     <div class="nav-content">
@@ -73,4 +73,4 @@
             <li><a class="nav-link" href="login.html"><i class="icofont-logout"></i>logout</a></li>
         </ul>
         
-</aside>
+</aside> --}}

@@ -22,7 +22,7 @@ class Orders extends Model
     // public $timestamps = false;
     function users()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class);
     }
     // In the Orders model (app/Models/Orders.php)
     public function order_details()

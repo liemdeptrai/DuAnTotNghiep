@@ -14,7 +14,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('admin/assets')}}/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('admin/assets')}}/images/favicon.png" type="image/x-icon">
-    <title>Voxo - Dashboard</title>
+    <title>6Guys- Dashboard</title>
 
     <!-- Google font-->
     <link
@@ -58,6 +58,7 @@
 </head>
 
 <body>
+    
     <!-- tap on top start -->
     <div class="tap-top">
         <span class="lnr lnr-chevron-up"></span>

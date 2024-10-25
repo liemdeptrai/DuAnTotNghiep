@@ -1,136 +1,84 @@
 @extends('admin.layouts.app')
+
 @section('content')
-    <div class="page-body-wrapper">
-
-
-        <!-- Order section Start -->
-        <div class="page-body">
-            <div class="title-header">
-                <h5>Order List</h5>
-            </div>
-
-            <!-- Table Start -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
+    <div class="container">
+        <h2>Danh sách đơn hàng</h2>
+        @if ($orders->isEmpty())
+            <p>Không có đơn hàng nào.</p>
+        @else
+            @php
+                $orderStatuses = [
+                    'pending' => 'Chờ xác nhận',
+                    'confirmed' => 'Đã xác nhận',
+                    'shipping' => 'Đang giao hàng',
+                    'delivered' => 'Đã giao thành công',
+                    'canceled' => 'Đã hủy'
+                ];
+            @endphp
+            <div class="row">
+                @foreach ($orders as $order)
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <div>
-                                    <div class="table-responsive table-desi">
-                                        <table class="table table-striped all-package">
-                                            <thead>
+                                <h5 class="card-title">ID Đơn hàng: {{ $order->id }}</h5>
+                                <p class="card-text"><strong>Khách hàng:</strong> {{ $order->user->name ?? 'Khách vãng lai' }}</p>
+                                <p class="card-text"><strong>Địa chỉ:</strong> {{ $order->address }}</p>
+                                <p class="card-text"><strong>Số điện thoại:</strong> {{ $order->phone }}</p>
+                                <p class="card-text"><strong>Phương thức thanh toán:</strong> {{ $order->payment_method }}</p>
+                                <p class="card-text"><strong>Tổng tiền:</strong> {{ number_format($order->total_price, 0, ',', '.') }} VND</p>
+                                <p class="card-text"><strong>Trạng thái:</strong>
+                                    <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PUT')
+                                        <select name="status" class="form-control d-inline" onchange="this.form.submit()">
+                                            @foreach ($orderStatuses as $key => $label)
+                                                <option value="{{ $key }}" {{ $order->status == $key ? 'selected' : '' }}>{{ $label }}</option>
+                                            @endforeach
+                                        </select>
+                                    </form>
+                                </p>
+                                <button class="btn btn-info" data-toggle="collapse" data-target="#orderDetails-{{ $order->id }}">
+                                    Xem chi tiết
+                                </button>
+                                <div id="orderDetails-{{ $order->id }}" class="collapse mt-2">
+                                    <table class="table table-sm table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Giá</th>
+                                                <th>Tổng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($order->orderDetails as $detail)
                                                 <tr>
-                                                    <th>Order Image</th>
-                                                    <th>Order Name</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Option</th>
+                                                    @if($detail->product)
+                                                        <td>{{ $detail->product->name }}</td>
+                                                    @else
+                                                        <td>Sản phẩm không tồn tại</td>
+                                                    @endif
+                                                    <td>{{ $detail->quantity }}</td>
+                                                    <td>{{ number_format($detail->price, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($detail->price * $detail->quantity, 0, ',', '.') }} VND</td>
                                                 </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                @php
-                                                    $subTotal = 0;
-                                                @endphp
-                                                @foreach ($groupedCart as $productId => $items)
-                                                    @php
-                                                        $orderDetail = $items->first();
-                                                        $totalQuantity = $items->sum('quantity');
-                                                        $subTotal = $totalQuantity * $orderDetail->product->price;
-                                                        $inputId = 'cartInput_' . $productId;
-                                                    @endphp
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <img src={{ $orderDetail->product->image }} alt="users">
-                                                            </span>
-                                                        </td>
-
-                                                        <td>{{ $orderDetail->product->name }}</td>
-
-                                                        <td>{{ number_format($orderDetail->product->price, 2) }}</td>
-
-                                                        <td>× {{ $totalQuantity }}</td>
-
-                                                        {{-- <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td> --}}
-
-                                                        <td>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="order-detail.html">
-                                                                        <span class="lnr lnr-eye"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-pencil"></span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <span class="lnr lnr-trash"></span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </form>
                             </div>
-
-                            <!-- Pagination Box Start -->
-                            <div class=" pagination-box">
-                                <nav class="ms-auto me-auto " aria-label="...">
-                                    <ul class="pagination pagination-primary">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="javascript:void(0)">Previous</a>
-                                        </li>
-
-                                        <li class="page-item active">
-                                            <a class="page-link" href="javascript:void(0)">1</a>
-                                        </li>
-
-                                        <li class="page-item">
-                                            <a class="page-link" href="javascript:void(0)">2</a>
-                                        </li>
-
-                                        <li class="page-item">
-                                            <a class="page-link" href="javascript:void(0)">3</a>
-                                        </li>
-
-                                        <li class="page-item">
-                                            <a class="page-link" href="javascript:void(0)">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <!-- Pagination Box End -->
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            <!-- Table End -->
-
-            <!-- footer start-->
-            <div class="container-fluid">
-                <footer class="footer">
-                    <div class="row">
-                        <div class="col-md-12 footer-copyright text-center">
-                            <p class="mb-0">Copyright 2021 © Voxo theme by pixelstrap</p>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <!-- Order section End -->
+        @endif
     </div>
+    <style>
+        
+        </style>
 @endsection

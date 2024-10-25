@@ -5,11 +5,10 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\OdersController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\usersCcontroller;
-use App\Http\Controllers\User\CheckoutController;
-use App\Http\Controllers\User\CheckoutpassController;
+use App\Http\Controllers\CheckoutController;
 use App\Models\admin\Category;
 use App\Models\admin\Product;
 use Illuminate\Support\Facades\Route;
@@ -36,15 +35,20 @@ require __DIR__ . '/auth.php';
 // });
 
 
-
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/products/list', [ProductController::class, 'index'])->name('admin.products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::post('/products/{id}', [ProductController::class, 'update']);
 Route::get('/Home/products', [ProductController::class, 'view'])->name('index.view');
 Route::get('/admin/addproducts', [ProductController::class, 'add'])->name('admin.products.add');
-Route::get('/admin/product/addproduct', [ProductController::class, 'add'])->name('admin.products.add');
-Route::post('/admin/product/store', [ProductController::class, 'store'])->name('admin.products.store');
+// Route::get('/admin/product/addproduct', [ProductController::class, 'add'])->name('admin.products.add');
+Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/admin/stock', [ProductController::class, 'stock'])->name('admin.products.stock');
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
-Route::put('/admin/product/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
+Route::delete('/admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+Route::put('/admin/products/{id}', [ProductController::class, 'update'])->name('admin.products.update');
+
 Route::delete('/admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
 Route::get('/admin/category', [CategoryController::class, 'category'])->name('admin.categories.index');
@@ -63,8 +67,11 @@ Route::put('/admin/user/update/{id}', [usersCcontroller::class, 'update'])->name
 
 Route::get('/Home', [HomeController::class, 'index'])->name('index');
 
-Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('user.checkout');
-Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('user.checkout.process');
+Route::get('/checkout/confirm', [CheckoutController::class, 'showConfirmCheckout'])->name('user.checkout.confirm');
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('user.checkout');
+Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('user.checkout.process');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -74,13 +81,15 @@ Route::delete('/cart/remove/{productId}', [CartController::class, 'remove'])->na
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
 Route::post('/cart/add/{itemId}/{quantity}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/checkout/checkoutpass', [CheckoutpassController::class, 'checkoutpass'])->name('user.checkoutpass');
+
 Route::post('/cart/add/{itemId}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/oders/list', [OdersController::class, 'list'])->name('admin.oders.list');
 
-Route::delete('/cart/{id}', [CheckoutController::class, 'destroy'])->name('cart.destroy');
-
-
+Route::get('/oders/list', [OrderController::class, 'list'])->name('admin.oders.list');
+Route::put('/admin/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::delete('/admin/orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+Route::get('/user/orders', [OrderController::class, 'index'])->name('user.orders');
+Route::get('/user/orders/{id}', [OrderController::class, 'show'])->name('user.orders.show');
+Route::get('/user/orders', [OrderController::class, 'index'])->name('user.orders.index');
 // Route::get('/', function () {
 //     return view('index');
 // });
@@ -91,14 +100,17 @@ Route::delete('/cart/{id}', [CheckoutController::class, 'destroy'])->name('cart.
 Route::get('/post/{id}', function ($id) {
     return $id;
 });
-Route::get('/admin/dashboard', function () {
-    return view('admin.index');
-});
+
 
 
 //categories CRUD create read update destroy 
 // get post put/patch destroy 
 
+Route::get('/category/manhinh', [CategoryController::class, 'showManhinh'])->name('category.manhinh');
+Route::get('/category/banphimco', [CategoryController::class, 'showbanphimco'])->name('category.banphimco');
+Route::get('/category/banhoc', [CategoryController::class, 'showbanhoc'])->name('category.banhoc');
+Route::get('/category/chuotkhongday', [CategoryController::class, 'showchuotkhongday'])->name('category.chuotkhongday');
+Route::get('/category/tranhtreotuong', [CategoryController::class, 'showtranhtreotuong'])->name('category.tranhtreotuong');
 
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('');

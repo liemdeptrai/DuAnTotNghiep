@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-body">
         <div class="title-header">
-            <h5>Products List</h5>
+            <h5>Danh Sách Danh Mục</h5>
         </div>
 
         <div class="container-fluid">
@@ -15,8 +15,8 @@
                                     <table class="table table-1d all-package">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Option</th>
+                                                <th>Tên</th>
+                                                <th>Hành Động</th>
                                             </tr>
                                         </thead>
 
@@ -42,7 +42,7 @@
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('delete')
-                                                                    <input type="submit" value="xoa">
+                                                                    <input type="submit" value="xóa">
                                                                 </form>
                                                             </li>
                                                         </ul>

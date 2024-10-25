@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-body">
         <div class="title-header">
-            <h5>Products List</h5>
+            <h5>Danh Sách Sản Phẩm</h5>
         </div>
 
         <div class="container-fluid">
@@ -16,25 +16,25 @@
                                     <table class="table table-1d all-package">
                                         <thead>
                                             <tr>
-                                                <th>Product Image</th>
-                                                <th>Product Name</th>
-                                                <th>Price</th>
-                                                <th>Option</th>
+                                                <th>Ảnh Sản Phẩm</th>
+                                                <th>Tên Sản Phẩm</th>
+                                                <th>Giá</th>
+                                                <th>Hành Động</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                             @foreach ($product as $item)
                                                 <tr>
+                                                    
                                                     <td>
                                                         @if ($item->image)
                                                             @php
                                                                 $images = json_decode($item->image); // Giải mã chuỗi JSON
                                                             @endphp
-                                                            @if (is_array($images) || is_object($images)) 
-                                                                @foreach ($images as $image)
-                                                                    <img src="{{ asset('storage/' . $image) }}" class="img-fluid" alt="Product Image" style="max-width: 100px; margin: 5px;">
-                                                                @endforeach
+                                                            @if (is_array($images) && count($images) > 0) 
+                                                                {{-- Hiển thị ảnh đầu tiên trong mảng --}}
+                                                                <img src="{{ asset('storage/' . $images[0]) }}" class="img-fluid" alt="Product Image" style="max-width: 100px; margin: 5px;">
                                                             @else
                                                                 <p>Invalid image data</p>
                                                             @endif
@@ -47,7 +47,12 @@
                                                         {{ $item->name }}
                                                     </td>
 
-                                                    <td class="td-price"> {{ $item->price }}</td>
+                                                    <td class="td-price">@if ($item->sale_percentage)
+                                                        <span class="old-price" style="text-decoration: line-through;">{{ $item->price }}<small>/</small></span>
+                                                        <span class="new-price" style="color:red;">{{ $item->price - ($item->price * ($item->sale_percentage / 100)) }}<small> VND</small></span>
+                                                    @else
+                                                        <span>{{ $item->price }}<small> VND</small></span>
+                                                    @endif</td>
 
                                                     <td>
                                                         <ul>
@@ -61,7 +66,7 @@
                                                                 <form action="{{ route('admin.products.destroy', $item->id) }}" method="post">
                                                                     @csrf
                                                                     @method('delete')
-                                                                    <input type="submit" value="Delete">
+                                                                    <input type="submit" value="Xóa">
                                                                 </form>
                                                             </li>
                                                         </ul>

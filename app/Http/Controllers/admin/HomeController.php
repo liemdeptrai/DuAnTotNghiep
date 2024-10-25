@@ -6,15 +6,33 @@ use App\Models\admin\Product;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Orders;
 use App\Models\admin\Orders_item;
+use App\Models\admin\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
-{
-    $products = Product::all(); // Hoặc cách lấy dữ liệu khác
-    return view('index', compact('products'));
-}
+    {
+        // Lấy tất cả sản phẩm
+        $products = Product::take(12)->get();
+    
+        // Lấy tất cả danh mục
+        $categories = Category::take(4)->get();
+    
+        // Lấy sản phẩm theo từng danh mục
+        $productsByCategory = [];
+        foreach ($categories as $category) {
+            $productsByCategory[$category->id] = Product::where('category_id', $category->id)->get();
+        }
+    
+        // Trả về view với cả sản phẩm và sản phẩm theo danh mục
+        return view('index', compact('products', 'categories', 'productsByCategory'));
+    }
+    public function showAll()
+    {
+        $products = Product::all(); // hoặc lấy sản phẩm theo cách bạn cần
+        return view('user.products.index', compact('products'));
+    }
     public function addCart($productId, $quantity)
     {
         $product = Product::findOrFail($productId);

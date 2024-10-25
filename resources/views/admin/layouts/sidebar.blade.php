@@ -29,70 +29,70 @@
                          <li class="back-btn"></li>
                          <li class="sidebar-main-title sidebar-main-title-3">
                              <div>
-                                 <h6 class="lan-1">General</h6>
+                                 <h6 class="lan-1">Tổng quan</h6>
                                  <p class="lan-2">Dashboards &amp; Users.</p>
                              </div>
                          </li>
 
                          <li class="sidebar-list">
-                             <a class="sidebar-link sidebar-title link-nav" href="index.html">
+                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.index') }}">
                                  <i data-feather="home"></i>
-                                 <span>Dashboard</span>
+                                 <span>Bảng điều khiển</span>
                              </a>
                          </li>
 
                          <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title" href="javascript:void(0)">
                                  <i data-feather="users"></i>
-                                 <span>Users</span>
+                                 <span>Người Dùng</span>
                              </a>
                              <ul class="sidebar-submenu">
                                  <li>
-                                     <a href="{{ route('admin.user.index') }}">All users</a>
+                                     <a href="{{ route('admin.user.index') }}">Tất Cả Người Dùng</a>
                                  </li>
                                  <li>
-                                     <a href="{{ route('admin.user.add') }}">Add new user</a>
+                                     <a href="{{ route('admin.user.add') }}">Thêm Người Dùng Mới</a>
                                  </li>
                              </ul>
                          </li>
 
                          <li class="sidebar-main-title sidebar-main-title-2">
                              <div>
-                                 <h6 class="lan-1">Application</h6>
-                                 <p class="lan-2">Ready To Use Apps</p>
+                                 <h6 class="lan-1">Ứng dụng</h6>
+                                 <p class="lan-2">Ứng dụng sẵn sàng sử dụng</p>
                              </div>
                          </li>
 
                          <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title" href="javascript:void(0)">
                                  <i data-feather="archive"></i>
-                                 <span>Orders</span>
+                                 <span>Đơn Hàng</span>
                              </a>
                              <ul class="sidebar-submenu">
                                  <li>
-                                     <a href="{{ route('admin.oders.list') }}">Order List</a>
+                                     <a href="{{ route('admin.oders.list') }}">Danh Sách </a>
                                  </li>
-                                 <li>
+                                 {{-- <li>
                                      <a href="order-detail.html">Order Detail</a>
                                  </li>
                                  <li>
                                      <a href="order-tracking.html">Order Tracking</a>
-                                 </li>
+                                 </li> --}}
                              </ul>
                          </li>
 
                          <li class="sidebar-list">
                              <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                  <i data-feather="users"></i>
-                                 <span>Category</span>
+                                 <span>Danh Mục</span>
                              </a>
                              <ul class="sidebar-submenu">
                                  <li>
-                                     <a href="{{ route('admin.categories.index') }}">Category List</a>
+                                     <a href="{{ route('admin.categories.index') }}">Danh Sách</a>
                                  </li>
 
                                  <li>
-                                     <a href="{{ route('admin.categories.add') }}">Create Category</a>
+                                     <a href="{{ route('admin.categories.add') }}">Thêm Danh Mục</a>
                                  </li>
                              </ul>
                          </li>
@@ -100,62 +100,62 @@
                          <li class="sidebar-list">
                              <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                  <i data-feather="box"></i>
-                                 <span>Product</span>
+                                 <span>Sản Phẩm</span>
                              </a>
                              <ul class="sidebar-submenu">
                                  <li>
-                                     <a href="{{ route('admin.products.index') }}">Products</a>
+                                     <a href="{{ route('admin.products.index') }}">Danh Sách</a>
                                  </li>
 
                                  <li>
-                                     <a href="{{ route('admin.products.add') }}">Add New Products</a>
+                                     <a href="{{ route('admin.products.add') }}">Thêm Sản Phẩm</a>
                                  </li>
                              </ul>
                          </li>
 
                     
 
-                         <li class="sidebar-list">
+                         {{-- <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title link-nav" href="product-review.html">
                                  <i data-feather="star"></i>
                                  <span>Product Review</span>
                              </a>
-                         </li>
+                         </li> --}}
 
                          <li class="sidebar-list">
-                             <a class="sidebar-link sidebar-title link-nav" href="invoice.html">
-                                 <i data-feather="archive"></i>
-                                 <span>Invoice</span>
-                             </a>
-                         </li>
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.products.stock') }}">
+                                <i data-feather="archive"></i>
+                                <span>Kho</span>
+                            </a>
+                        </li>
                          
-                         <li class="sidebar-list">
+                         {{-- <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title link-nav" href="reports.html">
                                  <i data-feather="file-text"></i>
                                  <span>Reports</span>
                              </a>
-                         </li>
+                         </li> --}}
 
-                         <li class="sidebar-list">
+                         {{-- <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title link-nav" href="list-page.html">
                                  <i data-feather="list"></i>
                                  <span>List Page</span>
                              </a>
-                         </li>
+                         </li> --}}
 
                          <li class="sidebar-list">
-                             <a class="sidebar-link sidebar-title link-nav" href="login.html">
+                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('index') }}">
                                  <i data-feather="log-in"></i>
                                  <span>Log In</span>
                              </a>
                          </li>
 
-                         <li class="sidebar-list">
+                         {{-- <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title link-nav" href="forgot-password.html">
                                  <i data-feather="key"></i>
                                  <span>Forgot Password</span>
                              </a>
-                         </li>
+                         </li> --}}
 
                          <li class="sidebar-list">
                              <a class="sidebar-link sidebar-title link-nav" href="sign-up.html">

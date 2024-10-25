@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\Category;
+use App\Models\admin\product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -40,11 +41,61 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showManhinh()
     {
-        //
+        // Định nghĩa ID của danh mục Màn Hình
+        $id_of_screen_category = 2; // Thay đổi giá trị này thành ID thực tế của danh mục
+    
+        // Lấy sản phẩm theo category_id
+        $products = Product::where('category_id', $id_of_screen_category)->get();
+    
+        // Truyền biến $products đến view
+        return view('user.category.manhinh', compact('products'));
     }
-
+    public function showbanphimco()
+    {
+        // Định nghĩa ID của danh mục Màn Hình
+        $id_of_screen_category = 1; // Thay đổi giá trị này thành ID thực tế của danh mục
+    
+        // Lấy sản phẩm theo category_id
+        $products = Product::where('category_id', $id_of_screen_category)->get();
+    
+        // Truyền biến $products đến view
+        return view('user.category.banphimco', compact('products'));
+    }
+    public function showbanhoc()
+    {
+        // Định nghĩa ID của danh mục Màn Hình
+        $id_of_screen_category = 3; // Thay đổi giá trị này thành ID thực tế của danh mục
+    
+        // Lấy sản phẩm theo category_id
+        $products = Product::where('category_id', $id_of_screen_category)->get();
+    
+        // Truyền biến $products đến view
+        return view('user.category.banhoc', compact('products'));
+    }
+    public function showchuotkhongday()
+    {
+        // Định nghĩa ID của danh mục Màn Hình
+        $id_of_screen_category = 4; // Thay đổi giá trị này thành ID thực tế của danh mục
+    
+        // Lấy sản phẩm theo category_id
+        $products = Product::where('category_id', $id_of_screen_category)->get();
+    
+        // Truyền biến $products đến view
+        return view('user.category.chuotkhongday', compact('products'));
+    }
+    public function showtranhtreotuong()
+    {
+        // Định nghĩa ID của danh mục Màn Hình
+        $id_of_screen_category = 5; // Thay đổi giá trị này thành ID thực tế của danh mục
+    
+        // Lấy sản phẩm theo category_id
+        $products = Product::where('category_id', $id_of_screen_category)->get();
+    
+        // Truyền biến $products đến view
+        return view('user.category.tranhtreotuong', compact('products'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

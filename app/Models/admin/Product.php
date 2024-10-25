@@ -4,18 +4,19 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\OrderDetail;
 class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'image',
         'price',
-        'content',
         'category_id',
-        'status',
+        'content',
+        'image', // Lưu chuỗi JSON chứa các ảnh
+        'quantity',
+        'sale_percentage', // Nếu có
     ];
     public $timestamps = false;
 
@@ -26,5 +27,9 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Orders::class, 'order_product')->withPivot('quantity', 'price');
+    }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'product_id');
     }
 }
