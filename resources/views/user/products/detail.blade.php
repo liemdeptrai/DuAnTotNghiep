@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
 
@@ -217,5 +217,5 @@
         });
     });</script>
 
-</body>
+
 @endsection

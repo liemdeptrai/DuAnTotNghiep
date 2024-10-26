@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
+<form class="bg0 p-t-75 p-b-85">
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -130,5 +131,5 @@
         }
     }
 </script>
-
+</form>
 @endsection

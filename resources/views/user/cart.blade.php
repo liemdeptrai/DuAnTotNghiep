@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
+<form class="bg0 p-t-75 p-b-85">
 @if(session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
@@ -12,6 +13,7 @@
         {{ session('success') }}
     </div>
 @endif
+
 <div class="container my-5">
     <h2 class="text-center mb-4">Giỏ hàng của bạn</h2>
 
@@ -105,6 +107,12 @@
         </div>
     @endif
 </div>
+
+
+</form>
+
+
+
 
 
 
