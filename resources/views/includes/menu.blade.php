@@ -19,7 +19,7 @@
 							<li>
 								<a href="{{route('index')}}">Home</a>
 							</li>
-							<li class="active-menu">
+							<li  class="label1" data-label1="hot">
 								<a href="">Sản phẩm</a>
 								<ul class="sub-menu">
 									<li><a href="{{ route('category.manhinh') }}">Màn Hình</a></li>
@@ -30,20 +30,20 @@
 								</ul>
 							</li>
 
-							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
+							<li >
+								<a href="{{route('cart.index')}}">Cart</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="{{ route('blog') }}">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="{{ route('about') }}">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="{{ route('contact') }}">Contact</a>
 							</li>
 						</ul>
 					</div>	
