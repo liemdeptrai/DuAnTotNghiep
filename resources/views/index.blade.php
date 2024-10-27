@@ -224,7 +224,7 @@
 	<section class="section-slide">
 		<div class="wrap-slick1 rs1-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(images/slide-03.jpg);">
+				<div class="item-slick1" style="background-image: url(img/banner1.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -248,7 +248,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(images/slide-02.jpg);">
+				<div class="item-slick1" style="background-image: url(img/banner2.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -272,7 +272,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(images/slide-04.jpg);">
+				<div class="item-slick1" style="background-image: url(img/banner7.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -304,7 +304,7 @@
 			<div class="size-202 m-lr-auto respon4">
 				<!-- Block1 -->
 				<div class="block1 wrap-pic-w">
-					<img src="images/banner-04.jpg" alt="IMG-BANNER">
+					<img src="img/banner4.jpg" alt="IMG-BANNER">
 
 					<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
@@ -329,7 +329,7 @@
 			<div class="size-202 m-lr-auto respon4">
 				<!-- Block1 -->
 				<div class="block1 wrap-pic-w">
-					<img src="images/banner-05.jpg" alt="IMG-BANNER">
+					<img src="img/banner5.jpg" alt="IMG-BANNER">
 
 					<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
@@ -354,7 +354,7 @@
 			<div class="size-202 m-lr-auto respon4">
 				<!-- Block1 -->
 				<div class="block1 wrap-pic-w">
-					<img src="images/banner-06.jpg" alt="IMG-BANNER">
+					<img src="img/banner3.jpg" alt="IMG-BANNER">
 
 					<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
@@ -378,7 +378,7 @@
 		</div>
 	</div>
     	<!-- Product -->
-	<section class="sec-product bg0 p-t-100 p-b-50">
+		<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
 			<div class="p-b-32">
 				<h3 class="ltext-105 cl5 txt-center respon1">
@@ -408,69 +408,72 @@
 				</ul>
 
 				<!-- Tab panes -->
+
 				<div class="tab-content p-t-50">
 					<!-- - -->
-                  
+					
 					<div class="tab-pane fade show active" id="best-seller" role="tabpanel">
 						<!-- Slide2 -->
 						<div class="wrap-slick2">
 							<div class="slick2">
-                                @foreach ($products as $item)
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
-                                    <div class="block2">
-                                        <div class="block2-pic hov-img0">
-                                            @if ($item->image)
-                                                @php
-                                                    $images = json_decode($item->image);
-                                                @endphp
-                                                @if (is_array($images) || is_object($images))
-                                                    <img src="{{ asset('storage/' . $images[0]) }}" alt="IMG-PRODUCT" style="width: 100%; height: 250px;">
-                                                @else
-                                                    <p>Invalid image data</p>
-                                                @endif
-                                            @else
-                                                <p>No image available</p>
-                                            @endif
-                            
-                                            <a href="{{ route('products.show', $item->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
-                                                Quick View
-                                            </a>
-                                        </div>
-                            
-                                        <div class="block2-txt flex-w flex-t p-t-14">
-                                            <div class="block2-txt-child1 flex-col-l">
-                                                <a href="{{ route('products.show', $item->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    {{ $item->name }}
-                                                </a>
-                            
-                                                @if ($item->sale_percentage)
-                                                    <span class="stext-105 cl3" style="text-decoration: line-through;">
-                                                        {{ number_format($item->price, 0, ',', '.') }} VND
-                                                    </span>
-                                                    <br>
-                                                    <span class="stext-105 cl3" style="color:red;">
-                                                        {{ number_format($item->price - ($item->price * ($item->sale_percentage / 100)), 0, ',', '.') }} VND
-                                                    </span>
-                                                @else
-                                                    <span class="stext-105 cl3">
-                                                        {{ number_format($item->price, 0, ',', '.') }} VND
-                                                    </span>
-                                                @endif
-                                            </div>
-                            
-                                            <div class="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-                                                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
+								@foreach ($products as $item)
+									<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+										<!-- Block2 -->
+										<div class="block2">
+											<div class="block2-pic hov-img0">
+												@if ($item->image)
+													@php
+														$images = json_decode($item->image);
+													@endphp
+													@if (is_array($images) || is_object($images))
+														 <img src="{{ asset('storage/' . $images[0]) }}" alt="IMG-PRODUCT" >
+													@else
+														<p>Invalid image data</p>
+													@endif
+												@else
+													<p>No image available</p>
+												@endif
+					
+												<a href="{{ route('products.show', $item->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+													Chi tiết 
+												</a>
+											</div>
+					
+											<div class="block2-txt flex-w flex-t p-t-14">
+												<div class="block2-txt-child1 flex-col-l">
+													<a href="{{ route('products.show', $item->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+														{{ $item->name }}
+													</a>
+					
+													@if ($item->sale_percentage)
+														<span class="stext-105 cl3" style="text-decoration: line-through;">
+															{{ number_format($item->price, 0, ',', '.') }} VND
+														</span>
+														<br>
+														<span class="stext-105 cl3" style="color:red;">
+															{{ number_format($item->price - ($item->price * ($item->sale_percentage / 100)), 0, ',', '.') }} VND
+														</span>
+													@else
+														<span class="stext-105 cl3">
+															{{ number_format($item->price, 0, ',', '.') }} VND
+														</span>
+													@endif
+												</div>
+					
+												<div class="block2-txt-child2 flex-r p-t-3">
+													<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+														<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+														<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								@endforeach
 							</div>
 						</div>
-                    </div>
+					</div>
+					
 
 					<!-- - -->
 					<div class="tab-pane fade" id="featured" role="tabpanel">
