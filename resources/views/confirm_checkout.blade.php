@@ -105,9 +105,10 @@
                     <h4>Tổng giá trị đơn hàng: <span class="fw-bold text-danger">{{ number_format($totalPrice, 0, ',', '.') }} VNĐ</span></h4>
                 </div>
 
-                <div class="text-right mt-3">
-                    <button type="submit" class="btn btn-success">Xác nhận thanh toán</button>
-                </div>
+               <div class="flex-w flex-t p-t-27 p-b-33">
+                <a href="#"class="flex-c-m stext-101 cl2 size-116 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">Xác nhận thanh toán</a>
+               </div>
+                
             </div>
         </div>
     </form>

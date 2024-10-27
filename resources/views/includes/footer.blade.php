@@ -404,5 +404,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     });
 </script>
 <!--===============================================================================================-->
-<script src="{{ asset('js/main.js') }}"></script>
-    </body>
+	<script src="{{ asset('js/main.js') }}"></script>
+</body>

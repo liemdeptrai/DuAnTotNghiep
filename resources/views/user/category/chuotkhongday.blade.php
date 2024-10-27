@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <h1 class="text-center my-4">Sản Phẩm Chuột Không Dây</h1>
     <div class="row">
         @foreach($products as $product)
@@ -78,5 +78,64 @@
     font-weight: bold;
     border-radius: 5px;
     }
-    </style>
+    </style> --}}
+    <div class="container">
+        <h1 class="text-center my-4">Chuột</h1>
+        <div class="row isotope-grid">
+            @foreach($products as $product)
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+                <!-- Block2 -->
+                <div class="block2">
+                    <div class="block2-pic hov-img0">
+                        @if ($product->image)
+                            @php
+                                $images = json_decode($product->image);
+                            @endphp
+                            @if (is_array($images) || is_object($images))
+                                <img src="{{ asset('storage/' . $images[0]) }}" alt="IMG-PRODUCT" class="img-fluid" style="width: 100%; height: auto;">
+                            @else
+                                <p>Invalid image data</p>
+                            @endif
+                        @else
+                            <p>No image available</p>
+                        @endif
+    
+                        <a href="{{ route('products.show', $product->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                            Quick View
+                        </a>
+                    </div>
+    
+                    <div class="block2-txt flex-w flex-t p-t-14">
+                        <div class="block2-txt-child1 flex-col-l">
+                            <a href="{{ route('products.show', $product->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                {{ $product->name }}
+                            </a>
+    
+                            @if ($product->sale_percentage)
+                                <span class="stext-105 cl3" style="text-decoration: line-through;">
+                                    {{ number_format($product->price, 0, ',', '.') }} VND
+                                </span>
+                                <br>
+                                <span class="stext-105 cl3" style="color:red;">
+                                    {{ number_format($product->price - ($product->price * ($product->sale_percentage / 100)), 0, ',', '.') }} VND
+                                </span>
+                            @else
+                                <span class="stext-105 cl3">
+                                    {{ number_format($product->price, 0, ',', '.') }} VND
+                                </span>
+                            @endif
+                        </div>
+    
+                        <div class="block2-txt-child2 flex-r p-t-3">
+                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
 @endsection
