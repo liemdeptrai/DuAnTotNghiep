@@ -1,9 +1,7 @@
-@extends('layouts.app')
-
+@extends('layout')
 @section('content')
     <div class="container">
         <h2>Danh sách đơn hàng của bạn</h2>
-        
         @if ($orders->isEmpty())
             <p>Bạn chưa có đơn hàng nào.</p>
         @else

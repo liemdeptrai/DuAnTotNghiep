@@ -112,12 +112,22 @@ Route::get('/category/banhoc', [CategoryController::class, 'showbanhoc'])->name(
 Route::get('/category/chuotkhongday', [CategoryController::class, 'showchuotkhongday'])->name('category.chuotkhongday');
 Route::get('/category/tranhtreotuong', [CategoryController::class, 'showtranhtreotuong'])->name('category.tranhtreotuong');
 
-Route::prefix('home')->name('home.')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('');
-    Route::get('/', [HomeController::class, ''])->name('');
-});
-
+// Route::prefix('home')->name('home.')->group(function () {
+//     Route::get('/', [HomeController::class, 'index'])->name('');
+//     Route::get('/', [HomeController::class, ''])->name('');
+// });
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('');
     Route::get('/', [AdminController::class, ''])->name('');
 });
+Route::get('/blog', function () {
+    return view('user.blog');
+})->name('blog');
+Route::get('/about', function () {
+    return view('user.about');
+})->name('about');
+Route::get('/contact', function () {
+    return view('user.contact');
+})->name('contact');
+
