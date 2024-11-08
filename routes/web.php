@@ -102,7 +102,7 @@ Route::get('/post/{id}', function ($id) {
 });
 
 
-
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 //categories CRUD create read update destroy 
 // get post put/patch destroy 
 

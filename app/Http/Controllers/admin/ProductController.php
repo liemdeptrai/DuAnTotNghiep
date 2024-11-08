@@ -166,4 +166,27 @@ class ProductController extends Controller
     $products = Product::select('image','id', 'name', 'quantity', 'price')->paginate(10); // Hiển thị tên, số lượng và giá
     return view('admin.products.stock', compact('products'));
 }
+public function search(Request $request)
+{
+    $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ input của người dùng
+    $products = Product::where('name', 'LIKE', "%{$query}%") // Tìm sản phẩm có tên chứa từ khóa
+        ->orWhere('content', 'LIKE', "%{$query}%")
+        ->get();
+
+    return view('admin.products.search', compact('products', 'query')); // Trả về view với kết quả tìm kiếm
+}
+public function reduceProductQuantity($productId, $quantity)
+{
+    $product = Product::find($productId);
+
+    if ($product) {
+        if ($product->quantity >= $quantity) {
+            $product->quantity -= $quantity; // Giảm số lượng sản phẩm
+            $product->save(); // Lưu lại thay đổi
+        } else {
+            // Nếu số lượng sản phẩm không đủ, có thể thông báo lỗi hoặc xử lý khác
+            throw new \Exception("Không đủ sản phẩm trong kho.");
+        }
+    }
+}
 }

@@ -40,9 +40,11 @@
         <div class="container">
             <div class="header-content">
                 <div class="header-media-group"><button class="header-user"><img src="{{ asset('img/user.png') }}" alt="user"></button>
-                            <a href="{{ route('index') }}"><img src={{ asset('img/logo.png') }} alt="logo" ></a>
+                    <a href="{{ route('index') }}">
+                        <img src="/img/logo1.png" alt="Logo">
+                    </a>
                             <button class="header-src"><i class="fas fa-search"></i></button></div>
-                            <a href="{{ route('index') }}" class="header-logo"><img src="img/logo.png" alt="logo" style="width: 140px; height: auto;"></a>
+                            <a href="{{ route('index') }}" class="header-logo"><img src="/img/logo1.png" alt="Logo" style="width: 140px; height: auto;"></a>
                     <li class="navbar-item dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -78,8 +80,9 @@
                         @endif
                     </ul>
                 </li>
-                <form class="header-form"><input type="text" placeholder="Search anything..."><button><i
-                    class="fas fa-search"></i></button>
+                <form class="header-form" action="{{ route('search') }}" method="GET">
+                    <input type="text" name="query" placeholder="Search anything...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <div class="header-widget-group">
                     <a href="{{ route('user.orders.index') }}" class="header-widget" title="Oder List">
@@ -96,6 +99,7 @@
                         </span>
                     </a>
                 </div>
+                
         </div>
     </header>
     <nav class="navbar-part">
@@ -149,8 +153,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget"><a class="footer-logo" href="#"><img src="img/logo.png"
-                                alt="logo"></a>
+                    <div class="footer-widget">
+                        <a class="footer-logo" href="#">
+                            <img src="{{ asset('img/logo1.png') }}" alt="logo">
+                        </a>
                         <p class="footer-desc"></p>
                         <ul class="footer-social">
                             <li><a class="fab fa-facebook" href="#"></a></li>
@@ -202,9 +208,14 @@
                     <div class="footer-widget">
                         <h3 class="footer-title">Tải ứng dụng</h3>
                         <p class="footer-desc"></p>
-                        <div class="footer-app"><a href="#"><img src="img/google-store.png"
-                                    alt="google"></a><a href="#"><img src="img/app-store.png"
-                                    alt="app"></a></div>
+                        <div class="footer-app">
+                            <a href="#">
+                                <img src="{{ asset('img/google-store.png') }}" alt="google">
+                            </a>
+                            <a href="#">
+                                <img src="{{ asset('img/app-store.png') }}" alt="app">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -213,10 +224,20 @@
                     <div class="footer-bottom">
                         <p class="footer-copytext">&copy; All Copyrights Reserved by <a href="#">Mironcoder</a>
                         </p>
-                        <div class="footer-card"><a href="#"><img src="img/01.jpg" alt="payment"></a><a
-                                href="#"><img src="img/02.jpg" alt="payment"></a><a href="#"><img
-                                    src="img/03.jpg" alt="payment"></a><a href="#"><img src="img/04.jpg"
-                                    alt="payment"></a></div>
+                        <div class="footer-card">
+                            <a href="#">
+                                <img src="{{ asset('img/01.jpg') }}" alt="payment">
+                            </a>
+                            <a href="#">
+                                <img src="{{ asset('img/02.jpg') }}" alt="payment">
+                            </a>
+                            <a href="#">
+                                <img src="{{ asset('img/03.jpg') }}" alt="payment">
+                            </a>
+                            <a href="#">
+                                <img src="{{ asset('img/04.jpg') }}" alt="payment">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

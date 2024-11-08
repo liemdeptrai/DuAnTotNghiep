@@ -66,23 +66,30 @@
         <div class="row" data-aos="fade-up" data-aos-duration="1000" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between;">
             @foreach ($products as $item)
                 <div class="col-lg-3 col-md-4 col-sm-6" style="margin-bottom: 15px;">
-                    <div class="product-wrapper"> <!-- Bao quanh sản phẩm -->
+                    <div class="product-wrapper @if($item->quantity == 0) out-of-stock @endif"> <!-- Bao quanh sản phẩm và kiểm tra nếu hết hàng -->
                         <div class="product-media">
                             @if ($item->sale) 
                                 <div class="product-label">
                                     <label class="label-text sale">Sale</label>
                                 </div>
                             @endif
-
+                            
+                            <!-- Kiểm tra số lượng sản phẩm -->
+                            @if ($item->quantity == 0)
+                                <div class="product-label">
+                                    <label class="label-text out-of-stock">Hết hàng</label> <!-- Nhãn hết hàng -->
+                                </div>
+                            @endif
+        
                             <button class="product-wish wish"><i class="fas fa-heart"></i></button>
-
+        
                             @if ($item->image)
                                 @php
                                     $images = json_decode($item->image);
                                 @endphp
                                 @if (is_array($images) || is_object($images)) 
                                     @foreach ($images as $image)
-                                        <img src="{{ asset('storage/' . $image) }}" class="img-fluid" alt="Product Image" style="width: 100%; height: 250px; ">
+                                        <img src="{{ asset('storage/' . $image) }}" class="img-fluid" alt="Product Image" style="width: 100%; height: 250px;">
                                     @endforeach
                                 @else
                                     <p>Invalid image data</p>
@@ -91,12 +98,14 @@
                                 <p>No image available</p>
                             @endif
                         </div>
+        
                         <div class="product-widget">
                             <a title="Product View" href="{{ route('products.show', $item->id) }}" class="fas fa-eye"></a>
                         </div>
+        
                         <div class="product-content">
                             <h6 class="product-names">
-                                <a href="product-video.html">{{ $item->name }}</a>
+                                <a href="{{ route('products.show', $item->id) }}">{{ $item->name }}</a>
                             </h6>
                             <h6 class="product-price">
                                 @if ($item->sale_percentage)
@@ -111,18 +120,18 @@
                                     <span>{{ number_format($item->price, 0, ',', '.') }}<small> VND</small></span>
                                 @endif
                             </h6>
-                        
-                            <div class="d-flex align-items-center"> <!-- Thêm align-items-center -->
+        
+                            <div class="d-flex align-items-center">
                                 <form id="addToCartForm" action="{{ route('cart.add', ['itemId' => $item->id]) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary @if($item->quantity == 0) disabled @endif">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                             <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
                                             <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
                                         </svg>
                                     </button>
                                 </form>
-                        
+        
                                 <a title="Chi tiết sản phẩm" href="{{ route('products.show', $item->id) }}" class="btn btn-secondary ms-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
@@ -131,12 +140,10 @@
                                 </a>
                             </div> <!-- Kết thúc div chứa nút -->
                         </div>
-                        
                     </div> <!-- Kết thúc sản phẩm -->
-                    
                 </div>
-                
             @endforeach
+        
             <div class="promotion-section">
                 <h2>Giảm giá lên đến 50% cho các sản phẩm hot</h2>
                 <p>Mua ngay hôm nay để nhận ưu đãi không thể bỏ qua!</p>
@@ -614,6 +621,21 @@
     position: relative; /* Đưa nội dung lên trên lớp mờ */
     z-index: 2;
 }
+.out-of-stock {
+    opacity: 0.5; /* Làm mờ sản phẩm */
+    pointer-events: none; /* Tắt các sự kiện chuột, không cho nhấn vào sản phẩm */
+}
 
+.product-label.out-of-stock {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
 </style>
 @endsection
